@@ -15,6 +15,7 @@ class BlogPost(models.Model):
 class PortfolioItem(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='portfolio_images/', blank=True, null=True)
     category = models.CharField(max_length=50, choices=[("programming", "Programming"),
                                                         ("stocks", "Stocks"),
                                                         ("workouts", "Workouts"),
@@ -36,6 +37,7 @@ class CodeSnippet(models.Model):
                                                            ("javascript", "JavaScript"),
                                                            ("jupyter", "Jupyter")])
     code = models.TextField()
+    description = models.TextField(blank=True, null=True)
 
 
 class StockItem(PortfolioItem):

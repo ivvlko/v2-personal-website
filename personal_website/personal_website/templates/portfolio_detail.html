@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}{{ item.title }} - My Portfolio{% endblock %}
+
+{% block content %}
+    <h1>{{ item.title }}</h1>
+    <p>{{ item.description }}</p>
+
+    {% if category == "programming" %}
+        {% if item.repo_link %}
+            <p><a href="{{ item.repo_link }}" target="_blank">Repo Link</a></p>
+        {% endif %}
+        {% if item.demo_link %}
+            <p><a href="{{ item.demo_link }}" target="_blank">Demo</a></p>
+        {% endif %}
+        {% if item.snippets.all %}
+            <h2>Code Snippets</h2>
+            {% for snippet in item.snippets.all %}
+                <h3>{{ snippet.language }}</h3>
+                <pre>{{ snippet.code }}</pre>
+            {% endfor %}
+        {% endif %}
+    {% elif category == "stocks" %}
+        <p><a href="{{ item.external_link }}" target="_blank">Stock Info</a></p>
+    {% elif category in "workouts history politics" %}
+        {% if item.video_url %}
+            <iframe width="560" height="315" src="{{ item.video_url }}" frameborder="0" allowfullscreen></iframe>
+        {% endif %}
+        <p>{{ item.text_content }}</p>
+    {% endif %}
+
+    <p><a href="{% url 'portfolio_category' category=category %}">Back to Portfolio</a></p>
+{% endblock %}

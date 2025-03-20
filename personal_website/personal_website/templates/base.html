@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}My Website{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    {% load static %}
+     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
 
+
     <nav>
         <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'home' %}">About</a></li>
             <li><a href="{% url 'portfolio' %}">Portfolio</a></li>
             <li><a href="{% url 'blog' %}">Blog</a></li>
             <li><a href="{% url 'contacts' %}">Contacts</a></li>
