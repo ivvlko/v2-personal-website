@@ -1,7 +1,31 @@
 {% extends "base.html" %}
 
-{% block title %}Home - My Website{% endblock %}
+{% block title %}Portfolio - My Website{% endblock %}
 
 {% block content %}
-    <h1>My Portfolio</h1>
+
+    <nav>
+        <ul>
+            {% for cat in categories %}
+                <li>
+                    <a href="{% url 'portfolio_category' category=cat %}"
+                       class="{% if cat == selected_category %}active{% endif %}">
+                        {{ cat|title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <ul>
+        {% for item in items %}
+            <li>
+                <a href="{% url 'portfolio_item_detail' category=selected_category item_id=item.id %}">
+                    {{ item.title }}
+                </a>
+            </li>
+        {% empty %}
+            <li>No items found in this category.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
