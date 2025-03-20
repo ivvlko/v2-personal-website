@@ -6,3 +6,15 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'home.html')
+
+
+def portfolio(request):
+    return render(request, 'portfolio.html')
+
+
+def blog(request):
+    return render(request, 'blog.html')
+
+
+def contacts(request):
+    return render(request, 'contacts.html')
