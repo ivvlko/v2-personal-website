@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Portfolio - My Website{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/portfolio.css' %}">
 
     <nav>
         <ul>
@@ -17,15 +18,18 @@
         </ul>
     </nav>
 
-    <ul>
-        {% for item in items %}
-            <li>
-                <a href="{% url 'portfolio_item_detail' category=selected_category item_id=item.id %}">
-                    {{ item.title }}
-                </a>
-            </li>
-        {% empty %}
-            <li>No items found in this category.</li>
-        {% endfor %}
-    </ul>
+<ul class="portfolio-list">
+    {% for item in items %}
+        <li class="portfolio-item">
+            <a href="{% url 'portfolio_item_detail' category=selected_category item_id=item.id %}">
+                <h3 class="portfolio-title">{{ item.title }}</h3>
+                {% if item.image %}
+                    <img class="portfolio-image" src="{{ item.image.url }}" alt="{{ item.title }}">
+                {% endif %}
+            </a>
+        </li>
+    {% empty %}
+        <li>No items found in this category.</li>
+    {% endfor %}
+</ul>
 {% endblock %}
