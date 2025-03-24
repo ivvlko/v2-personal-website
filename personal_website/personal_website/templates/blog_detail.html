@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ blog_post.title }}{% endblock %}
+
+{%block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'css/blog_detail.css' %}">
+    <div class="blog-detail">
+        <h1>{{ blog_post.title }}</h1>
+        <p><small>{{ blog_post.date|date:"F j, Y" }}</small></p>
+
+        {% if blog_post.images %}
+            <img src="{{ blog_post.images.url }}" alt="{{ blog_post.title }}" class="blog-detail-image">
+        {% endif %}
+
+        {% if blog_post.video %}
+            <video controls>
+                <source src="{{ blog_post.video.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        {% endif %}
+
+        <div class="content">
+            <p>{{ blog_post.content|linebreaks }}</p>
+        </div>
+    </div>
+
+{%endblock%}
