@@ -177,3 +177,5 @@ __pycache__/
 *.pyc
 .idea/
 *.pyo
+/personal_website/media
+db.sqlite3

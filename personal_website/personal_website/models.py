@@ -1,4 +1,5 @@
 from django.db import models
+from .utils import process_youtube_link
 
 
 class BlogPost(models.Model):
@@ -16,6 +17,8 @@ class PortfolioItem(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='portfolio_images/', blank=True, null=True)
+    video = models.FileField(upload_to='portfolio_videos/', blank=True, null=True)
+    video_url = models.URLField(blank=True, null=True)
     category = models.CharField(max_length=50, choices=[("programming", "Programming"),
                                                         ("stocks", "Stocks"),
                                                         ("workouts", "Workouts"),
@@ -24,6 +27,11 @@ class PortfolioItem(models.Model):
 
     class Meta:
         abstract = True
+
+    def save(self, *args, **kwargs):
+        if self.video_url:
+            self.video_url = process_youtube_link(self.video_url)
+        super().save(*args, **kwargs)
 
 
 class ProgrammingItem(PortfolioItem):
@@ -45,15 +53,13 @@ class StockItem(PortfolioItem):
 
 
 class HistoryItem(PortfolioItem):
-    video_url = models.URLField(blank=True, null=True)
     text_content = models.TextField(blank=True, null=True)
 
 
 class WorkoutItem(PortfolioItem):
-    video_url = models.URLField(blank=True, null=True)
     text_content = models.TextField(blank=True, null=True)
 
 
 class PoliticsItem(PortfolioItem):
-    video_url = models.URLField(blank=True, null=True)
     text_content = models.TextField(blank=True, null=True)
+
