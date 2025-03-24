@@ -13,6 +13,7 @@ urlpatterns = [
     path('blog/', views.blog, name='blog'),
     path('contacts/', views.contacts, name='contacts'),
     path('admin/', admin.site.urls),
+    path('stocks/<int:item_id>/', views.portfolio_item_detail, name='stock_portfolio_detail'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

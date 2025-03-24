@@ -25,7 +25,30 @@
             {% endfor %}
         {% endif %}
     {% elif category == "stocks" %}
-        <p><a href="{{ item.external_link }}" target="_blank">Stock Info</a></p>
+<h3>Stocks in this Portfolio</h3>
+<form method="get" action="{% url 'portfolio_item_detail' category item.id %}">
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" value="{{ start_date|date:'Y-m-d' }}">
+
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date" value="{{ end_date|date:'Y-m-d' }}">
+
+    <button type="submit">Calculate Dividends</button>
+</form>
+
+<div>
+{% for stock_name, data in dividend_data.items %}
+    <p>
+        <strong>{{ stock_name }}</strong><br>
+        Current Shares Count: {{ data.current_shares_count|floatformat:2 }}<br>
+        Dividends earned for selected period: {{ data.dividends }} $<br>
+        Current Price: {{ data.current_price|floatformat:2 }} $<br>
+
+        <a href="{{ data.yahoo_link }}" target="_blank">Yahoo Finance Link</a><br>
+    </p>
+{% endfor %}
+</div>
+
     {% elif category in "workouts history politics" %}
         {% if item.video_url %}
             <iframe width="560" height="315" src="{{ item.video_url }}" frameborder="0" allowfullscreen></iframe>
