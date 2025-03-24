@@ -1,7 +1,39 @@
 {% extends "base.html" %}
-
+{%load static%}
 {% block title %}Home - My Website{% endblock %}
-
 {% block content %}
-    <h1>You Can Contact Me:</h1>
+<link rel="stylesheet" type="text/css" href="{% static 'css/contacts.css' %}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <h1>My Socials</h1>
+
+<div class="contact-social">
+    <ul class="social-links">
+        <li><a href="mailto:ivankoevbg@gmail.com"><i class="fas fa-envelope"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/ivan-koev/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+        <li><a href="https://github.com/ivvlko" target="_blank"><i class="fab fa-github"></i></a></li>
+        <li><a href="https://www.instagram.com/ivanko9876/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="https://www.facebook.com/iv.ko.7921" target="_blank"><i class="fab fa-facebook"></i></a></li>
+    </ul>
+</div>
+
+    <h2>Send me a message directly:</h2>
+    <form method="POST" action="{% url 'send_email' %}">
+        {% csrf_token %}
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <button type="submit">Send Email</button>
+    </form>
+
+    {% if success %}
+        <p>Your message was sent successfully!</p>
+    {% elif error %}
+        <p>There was an error sending your message. Please try again later.</p>
+    {% endif %}
 {% endblock %}
