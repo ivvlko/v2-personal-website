@@ -6,7 +6,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from .models import ProgrammingItem, StockItem, WorkoutItem, HistoryItem, PoliticsItem
 
-
 def home(request):
     return render(request, 'home.html')
 

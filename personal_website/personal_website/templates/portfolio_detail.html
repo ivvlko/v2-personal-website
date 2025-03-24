@@ -4,19 +4,23 @@
 
 {% block content %}
     <h1>{{ item.title }}</h1>
-    <p>{{ item.description }}</p>
+    <img class="portfolio-image" src="{{ item.image.url }}" alt="{{ item.title }}">
 
+    <p>{{ item.description }}</p>
     {% if category == "programming" %}
         {% if item.repo_link %}
             <p><a href="{{ item.repo_link }}" target="_blank">Repo Link</a></p>
         {% endif %}
-        {% if item.demo_link %}
-            <p><a href="{{ item.demo_link }}" target="_blank">Demo</a></p>
-        {% endif %}
+
+{% if item.demo_link %}
+    <iframe width="560" height="315" src="{{ item.demo_link }}" frameborder="0" allowfullscreen></iframe>
+{% endif %}
+
         {% if item.snippets.all %}
             <h2>Code Snippets</h2>
             {% for snippet in item.snippets.all %}
-                <h3>{{ snippet.language }}</h3>
+                <h3> Technology: {{ snippet.language }}</h3>
+                <h3>Description: {{ snippet.description }}</h3>
                 <pre>{{ snippet.code }}</pre>
             {% endfor %}
         {% endif %}
