@@ -1,0 +1,57 @@
+/* Container for code snippets */
+.code-snippets-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for each snippet */
+.snippet {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid #333;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings inside the snippet */
+.snippet h3 {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #444;
+}
+
+/* Code block styling */
+.snippet pre {
+    background: #222;
+    color: #f8f8f2;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 600px) {
+    .code-snippets-container {
+        padding: 10px;
+    }
+
+    .snippet {
+        padding: 10px;
+    }
+
+    .snippet h3 {
+        font-size: 0.9rem;
+    }
+
+    .snippet pre {
+        font-size: 0.8rem;
+    }
+}
