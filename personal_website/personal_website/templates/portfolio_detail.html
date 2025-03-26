@@ -1,8 +1,10 @@
 {% extends "base.html" %}
-
+{%load static%}
 {% block title %}{{ item.title }} - My Portfolio{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/portfolio_detail.css' %}">
+
     <h1>{{ item.title }}</h1>
     <img class="portfolio-image" src="{{ item.image.url }}" alt="{{ item.title }}">
 
@@ -17,13 +19,19 @@
 {% endif %}
 
         {% if item.snippets.all %}
-            <h2>Code Snippets</h2>
-            {% for snippet in item.snippets.all %}
-                <h3> Technology: {{ snippet.language }}</h3>
-                <h3>Description: {{ snippet.description }}</h3>
-                <pre>{{ snippet.code }}</pre>
-            {% endfor %}
+            <div class="code-snippets-container">
+                <h2>Code Snippets</h2>
+                {% for snippet in item.snippets.all %}
+                    <div class="snippet">
+                        <h3>Technology: {{ snippet.language }}</h3>
+                        <h3>Description:</h3>
+                        <p>{{ snippet.description|linebreaks }}</p>
+                        <pre>{{ snippet.code }}</pre>
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
+
     {% elif category == "stocks" %}
 <form method="get" action="{% url 'portfolio_item_detail' category item.id %}" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
     <label for="start_date">Start Date:</label>

@@ -39,6 +39,10 @@
     object-fit: cover;
 }
 
+.active{
+color: skyblue;
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     .portfolio-item {
